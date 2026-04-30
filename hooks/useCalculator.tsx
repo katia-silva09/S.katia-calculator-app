@@ -101,14 +101,15 @@ export const useCalculator = () => {
     setPrevNumber(`${result}`);
   };
   const setLastOperator = (operator: Operator) => {
-    calculateSubResult();
+    if (!lasOperator.current) {
+      setPrevNumber(number);
+    } else {
+      calculateSubResult();
+    }
 
-    setPrevNumber(number);
     setNumber('0');
-
     lasOperator.current = operator;
   };
-
   const calculate = () => {
     const result = Result();
 

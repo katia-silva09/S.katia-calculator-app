@@ -15,6 +15,9 @@ const CalculatorApp = () => {
     addOperation,
     number,
     calculate,
+    subtractOperation,
+    divideOperation,
+    multiplyOperation,
   } = useCalculator();
   return (
     <View style={{ flex: 1, justifyContent: 'flex-end' }}>
@@ -44,7 +47,7 @@ const CalculatorApp = () => {
         <CalculatorButton
           label="÷"
           color={Colors.orange}
-          onPress={() => console.log('÷')}
+          onPress={divideOperation}
         />
       </View>
       <View style={globalStyles.row}>
@@ -66,7 +69,7 @@ const CalculatorApp = () => {
         <CalculatorButton
           label="X"
           color={Colors.orange}
-          onPress={() => console.log('X')}
+          onPress={multiplyOperation}
         />
       </View>
       <View style={globalStyles.row}>
@@ -88,7 +91,7 @@ const CalculatorApp = () => {
         <CalculatorButton
           label="-"
           color={Colors.orange}
-          onPress={() => console.log('-')}
+          onPress={subtractOperation}
         />
       </View>
       <View style={globalStyles.row}>
