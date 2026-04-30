@@ -21,8 +21,12 @@ export const useCalculator = () => {
 
   useEffect(() => {
     //todo calcular sub-resultado mas adelante
-    setFormula(number);
-  }, [number]);
+    if (lasOperator.current) {
+      setFormula(`${prevnumber} ${lasOperator.current}${number}`);
+    } else {
+      setFormula(number);
+    }
+  }, [number, prevnumber]);
 
   const clean = () => {
     (setNumber('0'), setPrevNumber('0'), setFormula('0'));
@@ -71,6 +75,51 @@ export const useCalculator = () => {
 
     setNumber(number + numberStrintg);
   };
+
+  const Result = (): number => {
+    const num1 = Number(prevnumber);
+    const num2 = Number(number);
+
+    switch (lasOperator.current) {
+      case Operator.add:
+        return num1 + num2;
+      case Operator.subtract:
+        return num1 - num2;
+      case Operator.multiply:
+        return num1 * num2;
+      case Operator.divide:
+        return num2 === 0 ? 0 : num1 / num2;
+
+      default:
+        return num2;
+    }
+  };
+  const calculateSubResult = () => {
+    if (!lasOperator.current) return;
+
+    const result = Result();
+    setPrevNumber(`${result}`);
+  };
+  const setLastOperator = (operator: Operator) => {
+    calculateSubResult();
+
+    setPrevNumber(number);
+    setNumber('0');
+
+    lasOperator.current = operator;
+  };
+
+  const calculate = () => {
+    const result = Result();
+
+    setNumber(`${result}`);
+    setPrevNumber('0');
+    lasOperator.current = undefined;
+  };
+  const addOperation = () => setLastOperator(Operator.add);
+  const subtractOperation = () => setLastOperator(Operator.subtract);
+  const multiplyOperation = () => setLastOperator(Operator.multiply);
+  const divideOperation = () => setLastOperator(Operator.divide);
   return {
     //props
     formula,
@@ -81,5 +130,10 @@ export const useCalculator = () => {
     buildNumber,
     clean,
     toogleSign,
+    addOperation,
+    subtractOperation,
+    multiplyOperation,
+    divideOperation,
+    calculate,
   };
 };
