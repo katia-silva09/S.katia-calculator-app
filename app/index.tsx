@@ -7,12 +7,20 @@ import React from 'react';
 import { View } from 'react-native';
 
 const CalculatorApp = () => {
-  const { formula, buildNumber, clean, toogleSign } = useCalculator();
+  const {
+    formula,
+    buildNumber,
+    clean,
+    toogleSign,
+    addOperation,
+    number,
+    calculate,
+  } = useCalculator();
   return (
     <View style={{ flex: 1, justifyContent: 'flex-end' }}>
       <View style={{ paddingHorizontal: 30, marginBottom: 20 }}>
         <ThemeText variant="h1">{formula}</ThemeText>
-        <ThemeText variant="h2">2010</ThemeText>
+        <ThemeText variant="h2">{number}</ThemeText>
       </View>
       <View style={globalStyles.row}>
         <CalculatorButton
@@ -102,7 +110,7 @@ const CalculatorApp = () => {
         <CalculatorButton
           label="+"
           color={Colors.orange}
-          onPress={() => console.log('+')}
+          onPress={addOperation}
         />
       </View>
       <View style={globalStyles.row}>
@@ -117,11 +125,7 @@ const CalculatorApp = () => {
           onPress={() => buildNumber('.')}
           color={Colors.darkGray}
         />
-        <CalculatorButton
-          label="="
-          color={Colors.orange}
-          onPress={() => console.log('=')}
-        />
+        <CalculatorButton label="=" color={Colors.orange} onPress={calculate} />
       </View>
     </View>
   );
