@@ -18,6 +18,7 @@ const CalculatorApp = () => {
     subtractOperation,
     divideOperation,
     multiplyOperation,
+    deleteLast,
   } = useCalculator();
   return (
     <View style={{ flex: 1, justifyContent: 'flex-end' }}>
@@ -40,7 +41,7 @@ const CalculatorApp = () => {
         />
         <CalculatorButton
           label="del"
-          onPress={() => console.log('del')}
+          onPress={deleteLast}
           color={Colors.lightGray}
           blackText
         />

@@ -43,6 +43,13 @@ export const useCalculator = () => {
     setNumber('-' + number);
   };
 
+  const deleteLast = () => {
+    if (number.length === 1 || (number.length === 2 && number.includes('-'))) {
+      return setNumber('0');
+    }
+    setNumber(number.slice(0, -1));
+  };
+
   const buildNumber = (numberStrintg: string) => {
     // verificar si ya existe el punto decimal
     if (number.includes('.') && numberStrintg === '.') return;
@@ -136,5 +143,6 @@ export const useCalculator = () => {
     multiplyOperation,
     divideOperation,
     calculate,
+    deleteLast,
   };
 };
